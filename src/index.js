@@ -7,6 +7,8 @@ import "./index.css";
 import Purchases from "./Purchases";
 import Header from "./ui/header/Header";
 
+document.title = "Rewards Program";
+
 ReactDOM.render(
   <React.StrictMode>
     <Header />
