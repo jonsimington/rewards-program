@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -21,22 +22,24 @@ for (const [index, value] of purchaseData.entries()) {
   );
 }
 
-function Purchases(props) {
-  return (
-    <Card bg="light">
-      <Card.Body>
-        <Container fluid>
-          <Row className="font-weight-bold text-center">
-            <Col sm={7}>Name</Col>
-            <Col>Total</Col>
-            <Col>Rewards Points Earned</Col>
-          </Row>
-          <hr></hr>
-          {purchases}
-        </Container>
-      </Card.Body>
-    </Card>
-  );
+class Purchases extends Component {
+  render() {
+    return (
+      <Card bg="light">
+        <Card.Body>
+          <Container fluid>
+            <Row className="font-weight-bold text-center">
+              <Col sm={7}>Name</Col>
+              <Col>Total</Col>
+              <Col>Rewards Points Earned</Col>
+            </Row>
+            <hr></hr>
+            {purchases}
+          </Container>
+        </Card.Body>
+      </Card>
+    );
+  }
 }
 
 export default Purchases;
