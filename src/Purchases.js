@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Filters from "./Filters";
 import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
 
@@ -39,6 +40,7 @@ class Purchases extends Component {
         <Card bg="light">
           <Card.Body>
             <Container fluid>
+              <Filters />
               <Accordion defaultActiveKey="1">
                 <Card>
                   <Card.Header>

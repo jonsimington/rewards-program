@@ -13,7 +13,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Header />
     <Container fluid className="bg-dark">
-      <Filters />
       <Purchases />
     </Container>
   </React.StrictMode>,
