@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
+import Container from "react-bootstrap/Container";
 import ReactDOM from "react-dom";
 import Filters from "./Filters";
 import "./index.css";
@@ -9,10 +10,10 @@ import Header from "./ui/header/Header";
 ReactDOM.render(
   <React.StrictMode>
     <Header />
-    <div class="container-fluid bg-dark">
+    <Container fluid className="bg-dark">
       <Filters />
       <Purchases />
-    </div>
+    </Container>
   </React.StrictMode>,
   document.getElementById("root")
 );

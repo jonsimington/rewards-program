@@ -23,7 +23,7 @@ for (const [index, value] of purchaseData.entries()) {
 
 function Purchases(props) {
   return (
-    <Card className="bg-light">
+    <Card bg="light">
       <Card.Body>
         <Container fluid>
           <Row className="font-weight-bold text-center">
