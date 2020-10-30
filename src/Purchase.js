@@ -10,18 +10,22 @@ class Purchase extends Component {
       <Container>
         <Row className="mb-2">
           <Col sm={7}>
-            <Card>
-              <Card.Body>{this.props.name}</Card.Body>
+            <Card bg="light">
+              <Card.Body className="font-weight-bold">
+                {this.props.name}
+              </Card.Body>
             </Card>
           </Col>
           <Col>
-            <Card>
-              <Card.Body>{this.props.total}</Card.Body>
+            <Card bg="light">
+              <Card.Body className="text-center">${this.props.total}</Card.Body>
             </Card>
           </Col>
           <Col>
-            <Card>
-              <Card.Body>{this.props.pointsEarned}</Card.Body>
+            <Card bg="light">
+              <Card.Body className="text-center">
+                {this.props.pointsEarned}
+              </Card.Body>
             </Card>
           </Col>
         </Row>
