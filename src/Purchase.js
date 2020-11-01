@@ -9,10 +9,22 @@ class Purchase extends Component {
     return (
       <Container>
         <Row className="mb-2">
-          <Col sm={7}>
+          <Col>
             <Card bg="light">
               <Card.Body className="font-weight-bold">
-                {this.props.name}
+                {this.props.customer_id}
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card bg="light">
+              <Card.Body className="text-center">{this.props.date}</Card.Body>
+            </Card>
+          </Col>
+          <Col sm="4">
+            <Card bg="light">
+              <Card.Body className="text-center">
+                {this.props.description}
               </Card.Body>
             </Card>
           </Col>

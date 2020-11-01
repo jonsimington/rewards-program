@@ -10,7 +10,24 @@ import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
 
 const rewardPointsEarned = (total) => {
-  return 2;
+  let pointsEarned = 0;
+
+  // get rid of cents in total
+  total = Math.floor(total);
+
+  // 2 points for each dollar spent over $100
+  if (total > 100) {
+    pointsEarned += (total - 100) * 2;
+  }
+
+  // 1 point earned for each dollar spend over $50
+  if (total > 50 && total > 100) {
+    pointsEarned += 50;
+  } else if (total > 50 && total < 100) {
+    pointsEarned += total - 50;
+  }
+
+  return pointsEarned;
 };
 
 const totalRewardsPoints = () => {
@@ -22,7 +39,9 @@ const purchases = [];
 for (const [index, value] of purchaseData.entries()) {
   purchases.push(
     <Purchase
-      name={value.name}
+      customer_id={value.customer_id}
+      date={value.date}
+      description={value.description}
       total={value.total}
       pointsEarned={rewardPointsEarned(value.total)}
     ></Purchase>
@@ -51,7 +70,9 @@ class Purchases extends Component {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       <Row className="font-weight-bold text-center">
-                        <Col sm={7}>Name</Col>
+                        <Col>Customer ID</Col>
+                        <Col>Date</Col>
+                        <Col sm="4">Description</Col>
                         <Col>Total</Col>
                         <Col>Rewards Points Earned</Col>
                       </Row>
