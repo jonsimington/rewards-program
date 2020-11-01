@@ -9,10 +9,11 @@ import Filters from "./Filters";
 import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
 
+// given a total amt spent, returns the number of rewards points earned by that purchase
 const rewardPointsEarned = (total) => {
   let pointsEarned = 0;
 
-  // get rid of cents in total
+  // get rid of cents in total to not give fractional points
   total = Math.floor(total);
 
   // 2 points for each dollar spent over $100
@@ -30,12 +31,28 @@ const rewardPointsEarned = (total) => {
   return pointsEarned;
 };
 
+// groups an array by groupKeys properties, and sums on sumKeys properties
+function groupAndSum(arr, groupKeys, sumKeys) {
+  return Object.values(
+    arr.reduce((acc, curr) => {
+      const group = groupKeys.map((k) => curr[k]).join("-");
+      acc[group] =
+        acc[group] ||
+        Object.fromEntries(
+          groupKeys.map((k) => [k, curr[k]]).concat(sumKeys.map((k) => [k, 0]))
+        );
+      sumKeys.forEach((k) => (acc[group][k] += curr[k]));
+      return acc;
+    }, {})
+  );
+}
+
 const totalRewardsPoints = () => {
   return 3;
 };
 
+// create array of <Purchase>s  to be able to display all purchases
 const purchases = [];
-
 for (const [index, value] of purchaseData.entries()) {
   purchases.push(
     <Purchase
@@ -47,6 +64,28 @@ for (const [index, value] of purchaseData.entries()) {
     ></Purchase>
   );
 }
+
+// add month and pointsEarned properties to purchaseData
+const purchaseDataWithMonthAndPoints = purchaseData.map((obj) => ({
+  ...obj,
+  month: obj.date.slice(0, 7), // assumes date is in yyyy-mm-dd format
+  pointsEarned: rewardPointsEarned(obj.total),
+}));
+
+// group by customer_id and month, and aggregate pointsEarned
+const grouped = groupAndSum(
+  purchaseDataWithMonthAndPoints,
+  ["customer_id", "month"],
+  ["pointsEarned"]
+);
+
+// adds children property to grouped array to show which purchases are in the group
+const groupedWithChildren = grouped.map((obj) => ({
+  ...obj,
+  children: purchaseDataWithMonthAndPoints.filter((e) => {
+    return e.customer_id == obj.customer_id && e.month == obj.month;
+  }),
+}));
 
 class Purchases extends Component {
   render() {
