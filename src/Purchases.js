@@ -47,7 +47,7 @@ const groupedWithChildren = groupedByCustomer
     ...obj,
     children: purchaseDataWithPoints
       .filter((e) => {
-        return e.customer_id == obj.customer_id;
+        return e.customer_id === obj.customer_id;
       })
       .map((obj) => ({ ...obj, month: obj.date.slice(0, 7) })),
   }))
