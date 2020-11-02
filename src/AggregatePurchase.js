@@ -46,7 +46,9 @@ class AggregatePurchase extends Component {
                 <h6>Total Points Earned</h6>
                 <Card bg="light">
                   <Card.Body className="text-center">
-                    {this.props.pointsEarned}
+                    {this.props.pointsEarned.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                    })}
                   </Card.Body>
                 </Card>
               </Col>
