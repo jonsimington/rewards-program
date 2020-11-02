@@ -70,7 +70,7 @@ class Purchases extends Component {
   render() {
     return (
       <Container fluid>
-        <Card bg="light">
+        <Card className="aggregateContainer">
           <Card.Body>{aggregatePurchases}</Card.Body>
         </Card>
       </Container>
