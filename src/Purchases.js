@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import AggregatePurchase from "./AggregatePurchase";
-import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
 import groupAndSum from "./util/groupAndSum";
 
@@ -28,31 +27,31 @@ const rewardPointsEarned = (total) => {
   return pointsEarned;
 };
 
-// add month and pointsEarned properties to purchaseData
-const purchaseDataWithMonthAndPoints = purchaseData.map((obj) => ({
+// add pointsEarned property to purchaseData
+const purchaseDataWithPoints = purchaseData.map((obj) => ({
   ...obj,
-  month: obj.date.slice(0, 7), // assumes date is in yyyy-mm-dd format
   pointsEarned: rewardPointsEarned(obj.total),
 }));
 
-// group by customer_id and month, and aggregate pointsEarned
-const grouped = groupAndSum(
-  purchaseDataWithMonthAndPoints,
-  ["customer_id", "month"],
+// group by customer_id, and aggregate pointsEarned
+const groupedByCustomer = groupAndSum(
+  purchaseDataWithPoints,
+  ["customer_id"],
   ["pointsEarned"]
 );
 
-// adds children property to grouped array to show which purchases are in the group
-let groupedWithChildren = grouped.map((obj) => ({
-  ...obj,
-  children: purchaseDataWithMonthAndPoints.filter((e) => {
-    return e.customer_id == obj.customer_id && e.month == obj.month;
-  }),
-}));
-
-groupedWithChildren = groupedWithChildren.sort((a, b) =>
-  a.customer_id > b.customer_id ? 1 : -1
-);
+// adds children property to grouped array to show which purchases are in each group
+// sorts results by customer_id asc
+const groupedWithChildren = groupedByCustomer
+  .map((obj) => ({
+    ...obj,
+    children: purchaseDataWithPoints
+      .filter((e) => {
+        return e.customer_id == obj.customer_id;
+      })
+      .map((obj) => ({ ...obj, month: obj.date.slice(0, 7) })),
+  }))
+  .sort((a, b) => (a.customer_id > b.customer_id ? 1 : -1));
 
 // create array of <AggregatePurchase>s  to be able to display the grouped data
 const aggregatePurchases = [];
@@ -60,7 +59,6 @@ for (const [index, value] of groupedWithChildren.entries()) {
   aggregatePurchases.push(
     <AggregatePurchase
       customer_id={value.customer_id}
-      month={value.month}
       pointsEarned={value.pointsEarned}
       children={value.children}
     ></AggregatePurchase>
