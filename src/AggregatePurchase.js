@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Purchase from "./Purchase";
+import prettifyMonth from "./util/prettifyMonth";
 
 class AggregatePurchase extends Component {
   render() {
@@ -40,7 +41,7 @@ class AggregatePurchase extends Component {
                 <h6>Month</h6>
                 <Card bg="light">
                   <Card.Body className="text-center">
-                    {this.props.month}
+                    {prettifyMonth(this.props.month)}
                   </Card.Body>
                 </Card>
               </Col>
