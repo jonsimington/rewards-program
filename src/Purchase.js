@@ -30,7 +30,12 @@ class Purchase extends Component {
           </Col>
           <Col>
             <Card bg="light">
-              <Card.Body className="text-center">${this.props.total}</Card.Body>
+              <Card.Body className="text-center">
+                $
+                {this.props.total.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </Card.Body>
             </Card>
           </Col>
           <Col>
