@@ -9,6 +9,7 @@ import AggregatePurchase from "./AggregatePurchase";
 import Filters from "./Filters";
 import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
+import groupAndSum from "./util/groupAndSum";
 
 // given a total amt spent, returns the number of rewards points earned by that purchase
 const rewardPointsEarned = (total) => {
@@ -31,22 +32,6 @@ const rewardPointsEarned = (total) => {
 
   return pointsEarned;
 };
-
-// groups an array by groupKeys properties, and sums on sumKeys properties
-function groupAndSum(arr, groupKeys, sumKeys) {
-  return Object.values(
-    arr.reduce((acc, curr) => {
-      const group = groupKeys.map((k) => curr[k]).join("-");
-      acc[group] =
-        acc[group] ||
-        Object.fromEntries(
-          groupKeys.map((k) => [k, curr[k]]).concat(sumKeys.map((k) => [k, 0]))
-        );
-      sumKeys.forEach((k) => (acc[group][k] += curr[k]));
-      return acc;
-    }, {})
-  );
-}
 
 // create array of <Purchase>s  to be able to display all purchases
 const purchases = [];
