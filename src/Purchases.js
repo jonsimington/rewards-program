@@ -81,12 +81,16 @@ const grouped = groupAndSum(
 );
 
 // adds children property to grouped array to show which purchases are in the group
-const groupedWithChildren = grouped.map((obj) => ({
+let groupedWithChildren = grouped.map((obj) => ({
   ...obj,
   children: purchaseDataWithMonthAndPoints.filter((e) => {
     return e.customer_id == obj.customer_id && e.month == obj.month;
   }),
 }));
+
+groupedWithChildren = groupedWithChildren.sort((a, b) =>
+  a.customer_id > b.customer_id ? 1 : -1
+);
 
 // create array of <AggregatePurchase>s  to be able to display the grouped data
 const aggregatePurchases = [];
