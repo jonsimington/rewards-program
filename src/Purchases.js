@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import AggregatePurchase from "./AggregatePurchase";
 import Filters from "./Filters";
 import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
@@ -87,6 +88,21 @@ const groupedWithChildren = grouped.map((obj) => ({
   }),
 }));
 
+// create array of <AggregatePurchase>s  to be able to display the grouped data
+const aggregatePurchases = [];
+for (const [index, value] of groupedWithChildren.entries()) {
+  aggregatePurchases.push(
+    <AggregatePurchase
+      customer_id={value.customer_id}
+      month={value.month}
+      pointsEarned={value.pointsEarned}
+      children={value.children}
+    ></AggregatePurchase>
+  );
+}
+
+console.log(groupedWithChildren);
+
 class Purchases extends Component {
   render() {
     return (
@@ -97,6 +113,7 @@ class Purchases extends Component {
 
         <Card bg="light">
           <Card.Body>
+            {aggregatePurchases}
             <Container fluid>
               <Filters />
               <Accordion defaultActiveKey="1">
