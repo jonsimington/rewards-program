@@ -48,10 +48,6 @@ function groupAndSum(arr, groupKeys, sumKeys) {
   );
 }
 
-const totalRewardsPoints = () => {
-  return 3;
-};
-
 // create array of <Purchase>s  to be able to display all purchases
 const purchases = [];
 for (const [index, value] of purchaseData.entries()) {
@@ -111,10 +107,6 @@ class Purchases extends Component {
   render() {
     return (
       <Container fluid>
-        <h1 className="text-center">
-          Total Rewards Points: {totalRewardsPoints()}
-        </h1>
-
         <Card bg="light">
           <Card.Body>
             {aggregatePurchases}
