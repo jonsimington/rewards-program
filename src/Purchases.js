@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import AggregatePurchase from "./AggregatePurchase";
-import Filters from "./Filters";
 import Purchase from "./Purchase";
 import purchaseData from "./purchaseData";
 import groupAndSum from "./util/groupAndSum";
@@ -32,20 +27,6 @@ const rewardPointsEarned = (total) => {
 
   return pointsEarned;
 };
-
-// create array of <Purchase>s  to be able to display all purchases
-const purchases = [];
-for (const [index, value] of purchaseData.entries()) {
-  purchases.push(
-    <Purchase
-      customer_id={value.customer_id}
-      date={value.date}
-      description={value.description}
-      total={value.total}
-      pointsEarned={rewardPointsEarned(value.total)}
-    ></Purchase>
-  );
-}
 
 // add month and pointsEarned properties to purchaseData
 const purchaseDataWithMonthAndPoints = purchaseData.map((obj) => ({
@@ -86,41 +67,12 @@ for (const [index, value] of groupedWithChildren.entries()) {
   );
 }
 
-console.log(groupedWithChildren);
-
 class Purchases extends Component {
   render() {
     return (
       <Container fluid>
         <Card bg="light">
-          <Card.Body>
-            {aggregatePurchases}
-            <Container fluid>
-              <Filters />
-              <Accordion defaultActiveKey="1">
-                <Card>
-                  <Card.Header>
-                    <Accordion.Toggle as={Button} eventKey="0">
-                      Show all purchases
-                    </Accordion.Toggle>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                      <Row className="font-weight-bold text-center">
-                        <Col>Customer ID</Col>
-                        <Col>Date</Col>
-                        <Col sm="4">Description</Col>
-                        <Col>Total</Col>
-                        <Col>Rewards Points Earned</Col>
-                      </Row>
-                      <hr></hr>
-                      {purchases}
-                    </Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-            </Container>
-          </Card.Body>
+          <Card.Body>{aggregatePurchases}</Card.Body>
         </Card>
       </Container>
     );
