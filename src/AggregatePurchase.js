@@ -87,24 +87,42 @@ class AggregatePurchase extends Component {
                               </Col>
                             </Row>
 
-                            <Row className="font-weight-bold text-center mt-3">
-                              <Col>Customer ID</Col>
-                              <Col>Date</Col>
-                              <Col sm="4">Description</Col>
-                              <Col>Total</Col>
-                              <Col>Rewards Points Earned</Col>
-                            </Row>
-                            <hr></hr>
+                            <Accordion defaultActiveKey="1">
+                              <Card>
+                                <Accordion.Toggle
+                                  as={Card.Header}
+                                  eventKey="0"
+                                  className="text-center btn"
+                                >
+                                  Toggle purchases for{" "}
+                                  <span className="font-weight-bold">
+                                    {prettifyMonth(month)}
+                                  </span>
+                                </Accordion.Toggle>
+                                <Accordion.Collapse eventKey="0">
+                                  <Card.Body>
+                                    <Row className="font-weight-bold text-center mt-3">
+                                      <Col>Customer ID</Col>
+                                      <Col>Date</Col>
+                                      <Col sm="4">Description</Col>
+                                      <Col>Total</Col>
+                                      <Col>Rewards Points Earned</Col>
+                                    </Row>
+                                    <hr></hr>
 
-                            {groupedByMonth[month].map((c) => (
-                              <Purchase
-                                customer_id={c.customer_id}
-                                date={c.date}
-                                description={c.description}
-                                total={c.total}
-                                pointsEarned={c.pointsEarned}
-                              ></Purchase>
-                            ))}
+                                    {groupedByMonth[month].map((c) => (
+                                      <Purchase
+                                        customer_id={c.customer_id}
+                                        date={c.date}
+                                        description={c.description}
+                                        total={c.total}
+                                        pointsEarned={c.pointsEarned}
+                                      ></Purchase>
+                                    ))}
+                                  </Card.Body>
+                                </Accordion.Collapse>
+                              </Card>
+                            </Accordion>
                           </Container>
                         </Card.Body>
                       </Card>
