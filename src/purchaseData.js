@@ -193,7 +193,7 @@ const purchaseData = [
   },
   {
     date: "2020-06-12",
-    description: "Brita Filtered Pitched Combo",
+    description: "Brita Filtered Pitcher Combo",
     total: 124.56,
     customer_id: 10,
   },
@@ -349,7 +349,7 @@ const purchaseData = [
   },
   {
     date: "2020-06-24",
-    description: "Scoes",
+    description: "Scones",
     total: 12.56,
     customer_id: 15,
   },
@@ -709,7 +709,7 @@ const purchaseData = [
   },
   {
     date: "2020-07-18",
-    description: "Chandalier",
+    description: "Chandelier",
     total: 218.83,
     customer_id: 8,
   },
@@ -793,7 +793,7 @@ const purchaseData = [
   },
   {
     date: "2020-07-25",
-    description: "Cat Litter  ",
+    description: "Cat Litter",
     total: 7.88,
     customer_id: 1,
   },
