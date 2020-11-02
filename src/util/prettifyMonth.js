@@ -15,9 +15,15 @@ const monthDict = {
 
 // converts `yyyy-mm` date to `MonthName Year`
 const prettifyMonth = (date) => {
-  const parts = date.split("-");
+  let result = "";
 
-  return `${monthDict[parts[1]]} ${parts[0]}`;
+  if (date) {
+    const parts = date.split("-");
+
+    result = `${monthDict[parts[1]]} ${parts[0]}`;
+  }
+
+  return result;
 };
 
 export default prettifyMonth;
