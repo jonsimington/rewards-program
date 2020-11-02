@@ -9,24 +9,24 @@ import Row from "react-bootstrap/Row";
 import Purchase from "./Purchase";
 import prettifyMonth from "./util/prettifyMonth";
 
+const totalPointsEarnedInMonth = (purchases) => {
+  let total = 0;
+  purchases.forEach((purchase) => {
+    total += purchase.pointsEarned;
+  });
+
+  return total;
+};
+
 class AggregatePurchase extends Component {
   render() {
     const groupedByMonth = _.groupBy(this.props.children, "month");
 
-    //console.log("groupedByMonth", groupedByMonth);
+    let monthTotals = {};
 
-    // create array of <Purchase>s  to be able to display all purchases
-    const childPurchases = [];
-    for (const [index, value] of this.props.children.entries()) {
-      childPurchases.push(
-        <Purchase
-          customer_id={value.customer_id}
-          date={value.date}
-          description={value.description}
-          total={value.total}
-          pointsEarned={value.pointsEarned}
-        ></Purchase>
-      );
+    // month: points earned dictionary
+    for (const [month, purchases] of Object.entries(groupedByMonth)) {
+      monthTotals[month] = totalPointsEarnedInMonth(purchases);
     }
 
     return (
@@ -67,20 +67,21 @@ class AggregatePurchase extends Component {
                             <Row>
                               <Col sm="9">
                                 <Card
-                                  bg="light"
-                                  className="text-center font-weight-bold"
+                                  bg="primary"
+                                  className="text-center font-weight-bold text-white"
+                                  border="primary"
                                 >
                                   <Card.Body>{prettifyMonth(month)}</Card.Body>
                                 </Card>
                               </Col>
                               <Col>
                                 <Card
-                                  bg="light"
-                                  className="text-center font-weight-bold"
+                                  bg="info"
+                                  className="text-center font-weight-bold text-white"
+                                  border="info"
                                 >
                                   <Card.Body>
-                                    20 Points
-                                    {groupedByMonth[month].monthTotal}
+                                    {monthTotals[month]} Points
                                   </Card.Body>
                                 </Card>
                               </Col>
