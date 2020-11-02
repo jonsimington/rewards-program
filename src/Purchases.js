@@ -61,7 +61,7 @@ for (const [index, value] of groupedWithChildren.entries()) {
       customer_id={value.customer_id}
       pointsEarned={value.pointsEarned}
       children={value.children}
-      key={`${value.customer_id}${value.pointsEarned}`}
+      key={`${value.customer_id}${value.pointsEarned}${index}`}
     ></AggregatePurchase>
   );
 }
