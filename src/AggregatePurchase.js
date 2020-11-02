@@ -25,10 +25,11 @@ class AggregatePurchase extends Component {
 
     return (
       <Container>
-        <Card className="mb-2">
+        <Card className="mb-2" border="dark">
           <Card.Body>
             <Row className="mb-2">
               <Col>
+                <h6>Customer ID</h6>
                 <Card bg="light">
                   <Card.Body className="font-weight-bold">
                     {this.props.customer_id}
@@ -36,6 +37,7 @@ class AggregatePurchase extends Component {
                 </Card>
               </Col>
               <Col>
+                <h6>Month</h6>
                 <Card bg="light">
                   <Card.Body className="text-center">
                     {this.props.month}
@@ -43,6 +45,7 @@ class AggregatePurchase extends Component {
                 </Card>
               </Col>
               <Col>
+                <h6>Total Points Earned</h6>
                 <Card bg="light">
                   <Card.Body className="text-center">
                     {this.props.pointsEarned}
@@ -54,7 +57,7 @@ class AggregatePurchase extends Component {
               <Card>
                 <Card.Header>
                   <Accordion.Toggle as={Button} eventKey="0">
-                    Show children of this grouping
+                    Show purchases for this grouping
                   </Accordion.Toggle>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
