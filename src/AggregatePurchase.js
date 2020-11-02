@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
@@ -10,6 +11,10 @@ import prettifyMonth from "./util/prettifyMonth";
 
 class AggregatePurchase extends Component {
   render() {
+    const groupedByMonth = _.groupBy(this.props.children, "month");
+
+    //console.log("groupedByMonth", groupedByMonth);
+
     // create array of <Purchase>s  to be able to display all purchases
     const childPurchases = [];
     for (const [index, value] of this.props.children.entries()) {
@@ -38,14 +43,6 @@ class AggregatePurchase extends Component {
                 </Card>
               </Col>
               <Col>
-                <h6>Month</h6>
-                <Card bg="light">
-                  <Card.Body className="text-center">
-                    {prettifyMonth(this.props.month)}
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
                 <h6>Total Points Earned</h6>
                 <Card bg="light">
                   <Card.Body className="text-center">
@@ -58,20 +55,59 @@ class AggregatePurchase extends Component {
               <Card>
                 <Card.Header>
                   <Accordion.Toggle as={Button} eventKey="0">
-                    Show purchases for this grouping
+                    Show monthly breakdown for this customer
                   </Accordion.Toggle>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    <Row className="font-weight-bold text-center">
-                      <Col>Customer ID</Col>
-                      <Col>Date</Col>
-                      <Col sm="4">Description</Col>
-                      <Col>Total</Col>
-                      <Col>Rewards Points Earned</Col>
-                    </Row>
-                    <hr></hr>
-                    {childPurchases}
+                    {Object.keys(groupedByMonth).map((month, index) => (
+                      <Card border="dark" className="mb-2">
+                        <Card.Body>
+                          <Container>
+                            <Row>
+                              <Col sm="9">
+                                <Card
+                                  bg="light"
+                                  className="text-center font-weight-bold"
+                                >
+                                  <Card.Body>{prettifyMonth(month)}</Card.Body>
+                                </Card>
+                              </Col>
+                              <Col>
+                                <Card
+                                  bg="light"
+                                  className="text-center font-weight-bold"
+                                >
+                                  <Card.Body>
+                                    20 Points
+                                    {groupedByMonth[month].monthTotal}
+                                  </Card.Body>
+                                </Card>
+                              </Col>
+                            </Row>
+
+                            <Row className="font-weight-bold text-center mt-3">
+                              <Col>Customer ID</Col>
+                              <Col>Date</Col>
+                              <Col sm="4">Description</Col>
+                              <Col>Total</Col>
+                              <Col>Rewards Points Earned</Col>
+                            </Row>
+                            <hr></hr>
+
+                            {groupedByMonth[month].map((c) => (
+                              <Purchase
+                                customer_id={c.customer_id}
+                                date={c.date}
+                                description={c.description}
+                                total={c.total}
+                                pointsEarned={c.pointsEarned}
+                              ></Purchase>
+                            ))}
+                          </Container>
+                        </Card.Body>
+                      </Card>
+                    ))}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
