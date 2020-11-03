@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -55,11 +54,16 @@ class AggregatePurchase extends Component {
             </Row>
             <Accordion defaultActiveKey="1">
               <Card>
-                <Card.Header>
-                  <Accordion.Toggle as={Button} eventKey="0">
-                    Show monthly breakdown for this customer
-                  </Accordion.Toggle>
-                </Card.Header>
+                <Accordion.Toggle
+                  as={Card.Header}
+                  eventKey="0"
+                  className="text-center btn toggleMonthlyBreakdown"
+                >
+                  Show monthly breakdown for{" "}
+                  <span className="font-weight-bold">
+                    Customer {this.props.customer_id}
+                  </span>
+                </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     {Object.keys(groupedByMonth).map((month, index) => (
@@ -90,13 +94,13 @@ class AggregatePurchase extends Component {
                             </Row>
 
                             <Accordion defaultActiveKey="1">
-                              <Card>
+                              <Card className="mt-2">
                                 <Accordion.Toggle
                                   as={Card.Header}
                                   eventKey="0"
-                                  className="text-center btn"
+                                  className="text-center btn toggleMonthlyPurchases"
                                 >
-                                  Toggle purchases for{" "}
+                                  Show purchases for{" "}
                                   <span className="font-weight-bold">
                                     {prettifyMonth(month)}
                                   </span>
