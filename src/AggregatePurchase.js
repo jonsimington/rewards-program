@@ -104,9 +104,9 @@ class AggregatePurchase extends Component {
                                 <Accordion.Collapse eventKey="0">
                                   <Card.Body>
                                     <Row className="font-weight-bold text-center mt-3">
-                                      <Col>Customer ID</Col>
-                                      <Col>Date</Col>
-                                      <Col sm="4">Description</Col>
+                                      <Col sm="2">Customer ID</Col>
+                                      <Col sm="3">Date</Col>
+                                      <Col sm="3">Description</Col>
                                       <Col>Total</Col>
                                       <Col>Rewards Points Earned</Col>
                                     </Row>

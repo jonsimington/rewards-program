@@ -9,19 +9,19 @@ class Purchase extends Component {
     return (
       <Container>
         <Row className="mb-2">
-          <Col>
+          <Col sm="2">
             <Card bg="light">
-              <Card.Body className="font-weight-bold">
+              <Card.Body className="font-weight-bold text-center">
                 {this.props.customer_id}
               </Card.Body>
             </Card>
           </Col>
-          <Col>
+          <Col sm="3">
             <Card bg="light">
               <Card.Body className="text-center">{this.props.date}</Card.Body>
             </Card>
           </Col>
-          <Col sm="4">
+          <Col sm="3">
             <Card bg="light">
               <Card.Body className="text-center">
                 {this.props.description}
