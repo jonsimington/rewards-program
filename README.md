@@ -13,3 +13,14 @@ A customer receives 2 points for every dollar spent over $100 in each transactio
 
 Given a record of every transaction during a three month period, calculate the reward points earned for each customer per month and total.
 ```
+
+# Interact live
+
+Browse to https://rewards.simington.io
+
+# How to Run
+
+1. Run `npm i` from the project root to install dependencies.
+2. Make sure you have `yarn` installed, then run `yarn start` to start the development server.
+3. Browse to `localhost:3000`.
+4. Enjoy!
