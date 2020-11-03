@@ -1,3 +1,5 @@
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from "lodash";
 import React, { Component } from "react";
 import Accordion from "react-bootstrap/Accordion";
@@ -59,10 +61,18 @@ class AggregatePurchase extends Component {
                   eventKey="0"
                   className="text-center btn toggleMonthlyBreakdown"
                 >
+                  <FontAwesomeIcon
+                    icon={faCaretDown}
+                    className="mr-2"
+                  ></FontAwesomeIcon>
                   Show monthly breakdown for{" "}
                   <span className="font-weight-bold">
                     Customer {this.props.customer_id}
                   </span>
+                  <FontAwesomeIcon
+                    icon={faCaretDown}
+                    className="ml-2"
+                  ></FontAwesomeIcon>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
@@ -100,10 +110,18 @@ class AggregatePurchase extends Component {
                                   eventKey="0"
                                   className="text-center btn toggleMonthlyPurchases"
                                 >
+                                  <FontAwesomeIcon
+                                    icon={faCaretDown}
+                                    className="mr-2"
+                                  ></FontAwesomeIcon>
                                   Show purchases for{" "}
                                   <span className="font-weight-bold">
                                     {prettifyMonth(month)}
                                   </span>
+                                  <FontAwesomeIcon
+                                    icon={faCaretDown}
+                                    className="ml-2"
+                                  ></FontAwesomeIcon>
                                 </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="0">
                                   <Card.Body>
